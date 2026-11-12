@@ -23,4 +23,4 @@ Worker → Settings → Variables and Secrets → Add:
 
 ## 5. Адрес
 Наверху страницы worker'а будет адрес вида `https://iltan-raumscan.XXXX.workers.dev`.
-Пришлите мне этот адрес (он не секретный) — я впишу его на страницу `/scan/`.
+Адрес: https://iltan-raumscan.katovski32.workers.dev (уже вписан в /scan/).
