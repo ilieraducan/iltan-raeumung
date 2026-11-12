@@ -11,6 +11,8 @@ T = {
   'Wohnungen, Häuser, Keller, Dachböden und Gewerbeflächen. Schicken Sie uns ein paar Fotos – Sie bekommen innerhalb von 24 Stunden ein verbindliches Angebot.': 'Квартиры, дома, подвалы, чердаки и коммерческие помещения. Пришлите нам несколько фото — в течение 24 часов вы получите точное предложение.',
   'Fotos per WhatsApp senden': 'Отправить фото в WhatsApp',
   'Kosten schätzen': 'Оценить объём',
+  '🎥 Per Video schätzen': '🎥 Оценка по видео',
+  'Genauer: Raum per Video scannen': 'Точнее: оценка по видео',
   'Kostenlose Besichtigung vor Ort oder per Foto': 'Бесплатный осмотр на месте или по фото',
   'Festpreis ohne versteckte Kosten': 'Фиксированная цена без скрытых доплат',
   'Fachgerechte Entsorgung und Recycling': 'Правильная утилизация и переработка',
@@ -105,6 +107,8 @@ T = {
   'Wohnungen, Häuser, Keller, Dachböden und Gewerbeflächen. Schicken Sie uns ein paar Fotos – Sie bekommen innerhalb von 24 Stunden ein verbindliches Angebot.': 'Apartamente, case, pivnițe, poduri și spații comerciale. Trimiteți-ne câteva fotografii – primiți o ofertă fermă în 24 de ore.',
   'Fotos per WhatsApp senden': 'Trimite poze pe WhatsApp',
   'Kosten schätzen': 'Estimează volumul',
+  '🎥 Per Video schätzen': '🎥 Evaluare după video',
+  'Genauer: Raum per Video scannen': 'Mai exact: evaluare după video',
   'Kostenlose Besichtigung vor Ort oder per Foto': 'Evaluare gratuită la fața locului sau după poze',
   'Festpreis ohne versteckte Kosten': 'Preț fix, fără costuri ascunse',
   'Fachgerechte Entsorgung und Recycling': 'Eliminare și reciclare conform legii',
@@ -248,6 +252,7 @@ def build(lang, src):
     hero_de = 'Hallo%20Iltan%20R%C3%A4umung%2C%20ich%20m%C3%B6chte%20ein%20Angebot%20f%C3%BCr%20eine%20Entr%C3%BCmpelung.'
     from urllib.parse import quote
     s = s.replace(hero_de, quote(j['hero']))
+    if pre: s = s.replace('href="scan/"', f'href="../scan/?lang={lang}"')
     s = s.replace("toLocaleString('de-DE')", f"toLocaleString('{ {'de':'de-DE','ru':'ru-RU','ro':'ro-RO'}[lang] }')")
     return s
 

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Raumscan – Iltan Räumung</title>
+<meta name="description" content="Räume per Video filmen – KI erkennt Möbel und schätzt die Menge für Ihre Entrümpelung in Stade und Hamburg.">
+<meta name="theme-color" content="#17332D">
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+<link rel="apple-touch-icon" href="../icon-180.png">
+<style>
+@font-face{font-family:"Archivo";font-weight:500;font-style:normal;font-display:swap;src:url(../fonts/archivo-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Archivo";font-weight:500;font-style:normal;font-display:swap;src:url(../fonts/archivo-latin-ext-500-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Archivo";font-weight:500;font-style:normal;font-display:swap;src:url(../fonts/manrope-cyrillic-500-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Archivo";font-weight:700;font-style:normal;font-display:swap;src:url(../fonts/archivo-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Archivo";font-weight:700;font-style:normal;font-display:swap;src:url(../fonts/archivo-latin-ext-700-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Archivo";font-weight:700;font-style:normal;font-display:swap;src:url(../fonts/manrope-cyrillic-700-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Archivo";font-weight:800;font-style:normal;font-display:swap;src:url(../fonts/archivo-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Archivo";font-weight:800;font-style:normal;font-display:swap;src:url(../fonts/archivo-latin-ext-800-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Archivo";font-weight:800;font-style:normal;font-display:swap;src:url(../fonts/manrope-cyrillic-800-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Source Sans 3";font-weight:400;font-style:normal;font-display:swap;src:url(../fonts/source-sans-3-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Source Sans 3";font-weight:400;font-style:normal;font-display:swap;src:url(../fonts/source-sans-3-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Source Sans 3";font-weight:400;font-style:normal;font-display:swap;src:url(../fonts/source-sans-3-cyrillic-400-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Source Sans 3";font-weight:600;font-style:normal;font-display:swap;src:url(../fonts/source-sans-3-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Source Sans 3";font-weight:600;font-style:normal;font-display:swap;src:url(../fonts/source-sans-3-latin-ext-600-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Source Sans 3";font-weight:600;font-style:normal;font-display:swap;src:url(../fonts/source-sans-3-cyrillic-600-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"IBM Plex Mono";font-weight:500;font-style:normal;font-display:swap;src:url(../fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-weight:500;font-style:normal;font-display:swap;src:url(../fonts/ibm-plex-mono-latin-ext-500-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"IBM Plex Mono";font-weight:500;font-style:normal;font-display:swap;src:url(../fonts/ibm-plex-mono-cyrillic-500-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+
+/* Layout: one narrow phone-first column; steps stack top to bottom; yellow accent from the Iltan Räumung site. */
+:root{
+  --bg:#F6F7F4; --surface:#FFFFFF; --ink:#16231F; --muted:#5A6762; --line:#DDE2DC;
+  --band:#17332D; --band-ink:#EEF3EE; --accent:#F2B531; --accent-ink:#1B1606; --warn:#B4541F; --ok:#2F7A4D;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1714;--surface:#16211D;--ink:#E6ECE8;--muted:#9AA8A2;--line:#26332E;--band:#0B2420;--band-ink:#E6EFEA;--warn:#E08A55;--ok:#5FBF86;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1714;--surface:#16211D;--ink:#E6ECE8;--muted:#9AA8A2;--line:#26332E;--band:#0B2420;--band-ink:#E6EFEA;--warn:#E08A55;--ok:#5FBF86;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--f-body);margin:0}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+header{background:var(--band);color:var(--band-ink)}
+header .wrap{padding-block:20px 22px}
+h1{font:800 24px/1.15 var(--f-display);margin:0}
+h2{font:800 18px/1.2 var(--f-display);margin:0}
+.sub{opacity:.85;margin-top:6px;font-size:15px}
+.tag{display:inline-block;font:600 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);padding:5px 8px;border-radius:4px;margin-bottom:10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:16px;display:grid;gap:12px}
+.step{font:600 12px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.drop{border:2px dashed var(--line);border-radius:10px;padding:18px;text-align:center;display:grid;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:999px;font:700 16px/1 var(--f-body);border:2px solid transparent;cursor:pointer;text-decoration:none}
+.btn-main{background:var(--accent);color:var(--accent-ink)}
+.btn-ghost{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn[disabled]{opacity:.5;cursor:default}
+.pick{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pickbtn{position:relative;overflow:hidden}
+.pickbtn input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:200px}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px}
+.thumbs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;display:block}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{display:grid;gap:4px;font-weight:600;font-size:14px}
+input[type=number],select{font:16px var(--f-body);padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);width:100%}
+.status{font-size:15px;color:var(--muted);min-height:1.5em}
+.items{display:grid;gap:6px}
+.item{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.item.kept{opacity:.5}
+.item.kept .nm{text-decoration:line-through}
+.item input{width:20px;height:20px;accent-color:var(--band)}
+.vol{font:600 14px/1 var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.q{background:var(--bg);border-left:4px solid var(--accent);padding:10px 12px;border-radius:6px;font-size:15px}
+.total{display:grid;gap:4px;border-top:1px dashed var(--line);padding-top:12px}
+.big{font:800 30px/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted);font-size:14px}
+.err{color:var(--warn)}
+textarea{width:100%;min-height:130px;font:14px/1.45 var(--f-mono);padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;font-weight:400}
+.consent input{width:20px;height:20px;margin-top:2px;flex:none}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.top a{color:inherit;text-decoration:none;font:800 18px/1 var(--f-display)}
+.langs{display:flex;gap:4px}
+.langs button{font:500 13px/1 var(--f-mono);padding:7px 8px;border-radius:6px;border:0;background:transparent;color:var(--band-ink);opacity:.75;cursor:pointer}
+.langs button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);opacity:1}
+.pick{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pickbtn{position:relative;overflow:hidden}
+.pickbtn input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:200px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="top"><a href="../" id="home">Iltan Räumung</a><nav class="langs" aria-label="Sprache"><button data-l="de">DE</button><button data-l="ru">RU</button><button data-l="ro">RO</button></nav></div>
+  <h1 data-t="h1"></h1>
+  <p class="sub" data-t="sub"></p>
+</div></header>
+<main class="wrap">
+  <section class="card">
+    <p class="step" data-t="s1"></p>
+    <div class="drop">
+      <p style="margin:0" data-t="howto"></p>
+      <div class="pick">
+        <span class="btn btn-main pickbtn"><span data-t="cam"></span><input id="cam" type="file" accept="video/*" capture="environment"></span>
+        <span class="btn btn-ghost pickbtn"><span data-t="gal"></span><input id="file" type="file" accept="video/*,image/*" multiple></span>
+      </div>
+      <p class="muted" id="fileinfo" style="margin:0"></p>
+    </div>
+    <div class="thumbs" id="thumbs"></div>
+  </section>
+  <section class="card">
+    <p class="step" data-t="s2"></p>
+    <div class="row">
+      <label for="area"><span data-t="area"></span><input id="area" type="number" min="3" max="500"></label>
+      <label for="floor"><span data-t="floor"></span><select id="floor"></select></label>
+    </div>
+    <label class="consent" for="consent"><input type="checkbox" id="consent"> <span data-t="consent"></span></label>
+    <button class="btn btn-main" id="go" disabled data-t="go"></button>
+    <p class="status" id="status" aria-live="polite"></p>
+  </section>
+  <section class="card" id="res" hidden>
+    <p class="step" data-t="s3"></p>
+    <h2 id="room"></h2>
+    <p class="muted" id="areaguess"></p>
+    <p class="muted" style="margin:0" data-t="untick"></p>
+    <div class="items" id="items"></div>
+    <div id="qs" style="display:grid;gap:8px"></div>
+    <div class="total">
+      <span class="muted" data-t="vol"></span>
+      <span class="big" id="vol"></span>
+      <span class="muted" id="loads"></span>
+      <span class="muted" data-t="prelim"></span>
+    </div>
+  </section>
+  <section class="card" id="sendcard" hidden>
+    <p class="step" data-t="s4"></p>
+    <p class="muted" style="margin:0" data-t="sendhint"></p>
+    <textarea id="summary" readonly></textarea>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn btn-main" id="wa" href="#" target="_blank" rel="noopener" data-t="wa"></a>
+      <button class="btn btn-ghost" id="copy" data-t="copy"></button>
+    </div>
+    <p class="muted" style="margin:0">WhatsApp / Tel.: 0151 11143537 · info@iltan-raeumung.de</p>
+  </section>
+  <p class="muted" style="margin-top:20px"><a href="../#impressum">Impressum</a> · <a href="../#datenschutz">Datenschutz</a></p>
+</main>
+<script>
+(function(){
+var ENDPOINT='__WORKER_URL__';
+var WA='4915111143537';
+var T={
+de:{h1:'Raumscan: Menge per Video schätzen',sub:'Filmen Sie den Raum oder machen Sie 3–6 Fotos. Unsere KI erkennt Möbel und Gegenstände und schätzt die Menge für die Räumung.',s1:'Schritt 1 · Video oder Fotos',howto:'Schwenken Sie die Kamera langsam durch den Raum, 10–20 Sekunden. Oder wählen Sie einige Fotos aus.',cam:'🎥 Video aufnehmen',gal:'🖼 Fotos oder Video wählen',nofile:'Noch keine Datei gewählt',vidinfo:'Video: {n} Bilder entnommen',photoinfo:'Fotos: {n}',s2:'Schritt 2 · Angaben (optional)',area:'Fläche in m²',floor:'Etage ohne Aufzug',floors:['Erdgeschoss / mit Aufzug','1. Etage','2. Etage','3. Etage oder höher'],consent:'Ich bin einverstanden, dass die Bilder zur Schätzung an einen KI-Dienst übermittelt werden. Sie werden nicht gespeichert. Mehr im Datenschutz.',go:'Menge schätzen',s3:'Schritt 3 · Was soll weg?',untick:'Entfernen Sie den Haken bei allem, was bleiben soll.',vol:'Geschätzte Menge',prelim:'Unverbindliche Schätzung. Den Festpreis nennen wir nach Prüfung Ihrer Fotos.',s4:'Schritt 4 · Anfrage senden',sendhint:'Senden Sie diese Zusammenfassung per WhatsApp und schicken Sie im Chat bitte auch die Fotos.',wa:'Per WhatsApp senden',copy:'Kopieren',copied:'Kopiert',prep:'Bilder werden vorbereitet…',think:'Die KI prüft die Bilder… meist 20–60 Sekunden.',err:'Das hat nicht geklappt. Bitte versuchen Sie es erneut oder schicken Sie uns die Fotos per WhatsApp.',limit:'Heute sind keine weiteren Schätzungen möglich. Schicken Sie uns die Fotos bitte direkt per WhatsApp.',badfile:'Die Datei konnte nicht gelesen werden. Versuchen Sie es mit Fotos.',area_ai:'Fläche laut Video: ca. {a} m²',conf:{low:'Sicherheit: gering',medium:'Sicherheit: mittel',high:'Sicherheit: hoch'},loads1:'ca. {n} Transporterladung',loadsN:'ca. {n} Transporterladungen',clutter:'Kleinteile, Säcke, Kartons',sumTitle:'Anfrage Entrümpelung (Raumscan)',sumRoom:'Raum',sumFloor:'Etage',sumTake:'Soll weg',sumKeep:'Bleibt',sumVol:'Menge',nothing:'nichts',locale:'de-DE',m3:'m³'},
+ru:{h1:'Оценка по видео',sub:'Снимите комнату на видео или сделайте 3–6 фото. ИИ найдёт мебель и вещи и посчитает примерный объём вывоза.',s1:'Шаг 1 · Видео или фото',howto:'Медленно проведите камерой по комнате, 10–20 секунд. Или выберите несколько фото.',cam:'🎥 Снять видео',gal:'🖼 Выбрать фото или видео',nofile:'Файл не выбран',vidinfo:'Видео: взято {n} кадров',photoinfo:'Фото: {n}',s2:'Шаг 2 · Детали (по желанию)',area:'Площадь, м²',floor:'Этаж без лифта',floors:['1-й этаж / есть лифт','2-й этаж','3-й этаж','4-й этаж и выше'],consent:'Я согласен, что фото передаются сервису ИИ для оценки. Они не сохраняются. Подробнее в разделе Datenschutz.',go:'Оценить объём',s3:'Шаг 3 · Что вывозим?',untick:'Снимите галочку с того, что остаётся.',vol:'Примерный объём вывоза',prelim:'Предварительная оценка. Фиксированную цену назовём после просмотра ваших фото.',s4:'Шаг 4 · Отправить заявку',sendhint:'Отправьте этот текст в WhatsApp и, пожалуйста, пришлите в чат и сами фото.',wa:'Отправить в WhatsApp',copy:'Скопировать',copied:'Скопировано',prep:'Готовлю кадры…',think:'ИИ смотрит кадры… обычно 20–60 секунд.',err:'Не получилось. Попробуйте ещё раз или пришлите фото нам в WhatsApp.',limit:'На сегодня лимит оценок исчерпан. Пришлите, пожалуйста, фото прямо в WhatsApp.',badfile:'Не получилось прочитать файл. Попробуйте фото.',area_ai:'Площадь по видео: примерно {a} м²',conf:{low:'уверенность: низкая',medium:'уверенность: средняя',high:'уверенность: высокая'},loads1:'примерно {n} загрузка фургона',loadsN:'примерно {n} загрузки фургона',clutter:'Мелкие вещи, пакеты, коробки',sumTitle:'Заявка на вывоз (оценка по видео)',sumRoom:'Помещение',sumFloor:'Этаж',sumTake:'Вывозим',sumKeep:'Оставляем',sumVol:'Объём',nothing:'ничего',locale:'ru-RU',m3:'м³'},
+ro:{h1:'Evaluare după video',sub:'Filmați încăperea sau faceți 3–6 poze. Inteligența artificială recunoaște mobila și obiectele și estimează volumul de ridicat.',s1:'Pasul 1 · Video sau poze',howto:'Mișcați încet camera prin încăpere, 10–20 de secunde. Sau alegeți câteva poze.',cam:'🎥 Filmează',gal:'🖼 Alege poze sau video',nofile:'Niciun fișier ales',vidinfo:'Video: {n} cadre extrase',photoinfo:'Poze: {n}',s2:'Pasul 2 · Detalii (opțional)',area:'Suprafață, m²',floor:'Etaj fără lift',floors:['Parter / cu lift','Etajul 1','Etajul 2','Etajul 3 sau mai sus'],consent:'Sunt de acord ca pozele să fie trimise unui serviciu de inteligență artificială pentru evaluare. Nu sunt salvate. Detalii la Datenschutz.',go:'Estimează volumul',s3:'Pasul 3 · Ce ridicăm?',untick:'Debifați ce rămâne.',vol:'Volum estimat',prelim:'Estimare orientativă. Prețul fix vi-l comunicăm după ce vedem pozele.',s4:'Pasul 4 · Trimite cererea',sendhint:'Trimiteți acest text pe WhatsApp și vă rugăm trimiteți în chat și pozele.',wa:'Trimite pe WhatsApp',copy:'Copiază',copied:'Copiat',prep:'Pregătesc cadrele…',think:'Inteligența artificială analizează pozele… de obicei 20–60 de secunde.',err:'Nu a reușit. Încercați din nou sau trimiteți-ne pozele pe WhatsApp.',limit:'Astăzi nu mai sunt posibile estimări. Vă rugăm trimiteți pozele direct pe WhatsApp.',badfile:'Fișierul nu a putut fi citit. Încercați cu poze.',area_ai:'Suprafață după video: aprox. {a} m²',conf:{low:'siguranță: scăzută',medium:'siguranță: medie',high:'siguranță: ridicată'},loads1:'aprox. {n} transport cu duba',loadsN:'aprox. {n} transporturi cu duba',clutter:'Obiecte mărunte, saci, cutii',sumTitle:'Cerere debarasare (evaluare video)',sumRoom:'Încăpere',sumFloor:'Etaj',sumTake:'Ridicăm',sumKeep:'Rămâne',sumVol:'Volum',nothing:'nimic',locale:'ro-RO',m3:'m³'}
+};
+var $=function(id){return document.getElementById(id)};
+var lang=(new URLSearchParams(location.search).get('lang')||'').toLowerCase();
+if(!T[lang]){ try{lang=localStorage.getItem('iltan-lang')||''}catch(e){} }
+if(!T[lang]) lang=(navigator.language||'de').slice(0,2); if(!T[lang]) lang='de';
+var t=function(k){return T[lang][k]};
+var frames=[],result=null,list=[];
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-t]').forEach(function(el){el.textContent=t(el.dataset.t)});
+  document.querySelectorAll('.langs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===lang?'true':'false')});
+  var sel=$('floor'),v=sel.value||'0'; sel.innerHTML=''; t('floors').forEach(function(f,i){var o=document.createElement('option');o.value=i;o.textContent=f;sel.appendChild(o)}); sel.value=v;
+  $('home').href=lang==='de'?'../':'../'+lang+'/';
+  if(!frames.length) $('fileinfo').textContent=t('nofile');
+  if(result) render();
+}
+document.querySelectorAll('.langs button').forEach(function(b){b.addEventListener('click',function(){lang=b.dataset.l;try{localStorage.setItem('iltan-lang',lang)}catch(e){}applyLang()})});
+function setStatus(s,err){$('status').textContent=s;$('status').className='status'+(err?' err':'')}
+function canGo(){$('go').disabled=!(frames.length&&$('consent').checked)}
+function toBlob(c){return new Promise(function(r){c.toBlob(r,'image/jpeg',0.8)})}
+function scaleDraw(src,w,h){var s=Math.min(1,1100/Math.max(w,h));var c=document.createElement('canvas');c.width=Math.round(w*s);c.height=Math.round(h*s);c.getContext('2d').drawImage(src,0,0,c.width,c.height);return c}
+function videoFrames(file,n){return new Promise(function(res,rej){var v=document.createElement('video');v.muted=true;v.playsInline=true;v.preload='auto';v.src=URL.createObjectURL(file);var out=[];v.onerror=function(){rej(new Error('video'))};v.onloadedmetadata=async function(){var d=v.duration;if(!isFinite(d)||d<=0)d=10;for(var i=0;i<n;i++){await new Promise(function(ok){v.onseeked=ok;v.currentTime=Math.min(d*(i+0.5)/n,d-0.05)});out.push(await toBlob(scaleDraw(v,v.videoWidth,v.videoHeight)))}URL.revokeObjectURL(v.src);res(out)}})}
+function imageBlob(f){return new Promise(function(res,rej){var im=new Image();im.onload=async function(){res(await toBlob(scaleDraw(im,im.naturalWidth,im.naturalHeight)));URL.revokeObjectURL(im.src)};im.onerror=rej;im.src=URL.createObjectURL(f)})}
+async function onPick(e){var files=[].slice.call(e.target.files||[]);if(!files.length)return;frames=[];$('thumbs').innerHTML='';setStatus(t('prep'));
+  try{var vid=files.find(function(f){return f.type.indexOf('video')===0});
+    if(vid){frames=await videoFrames(vid,6);$('fileinfo').textContent=t('vidinfo').replace('{n}',frames.length)}
+    else{for(var f of files.slice(0,6))frames.push(await imageBlob(f));$('fileinfo').textContent=t('photoinfo').replace('{n}',frames.length)}
+    frames.forEach(function(b){var im=document.createElement('img');im.alt='';im.src=URL.createObjectURL(b);$('thumbs').appendChild(im)});setStatus('')
+  }catch(err){frames=[];setStatus(t('badfile'),true)}canGo()}
+$('cam').addEventListener('change',onPick);$('file').addEventListener('change',onPick);$('consent').addEventListener('change',canGo);
+function b64(blob){return new Promise(function(r){var fr=new FileReader();fr.onload=function(){r(String(fr.result).split(',')[1])};fr.readAsDataURL(blob)})}
+$('go').addEventListener('click',async function(){$('go').disabled=true;setStatus(t('think'));
+  try{var imgs=await Promise.all(frames.map(b64));
+    var r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({images:imgs,lang:lang,area:$('area').value,floor:T.de.floors[+$('floor').value]})});
+    var data=await r.json().catch(function(){return null});
+    if(r.status===429){setStatus(t('limit'),true)}
+    else if(!r.ok||!data||!Array.isArray(data.items)){setStatus(t('err'),true)}
+    else{result=data;list=data.items.map(function(x){return{name:String(x.name||'?'),count:num(x.count)||1,m3:num(x.m3_each),keep:false}});if(num(data.clutter_m3))list.push({name:'*',count:1,m3:num(data.clutter_m3),keep:false});render();setStatus('')}
+  }catch(e){setStatus(t('err'),true)}canGo()});
+function num(x){x=Number(x);return isFinite(x)&&x>0?x:0}
+function fmt(x){return(Math.round(x*10)/10).toLocaleString(t('locale'))}
+function nm(it){return it.name==='*'?t('clutter'):it.name}
+function render(){$('res').hidden=false;$('sendcard').hidden=false;$('room').textContent=result.room||'';
+  var a1=num(result.area_min),a2=num(result.area_max);
+  $('areaguess').textContent=(a1?t('area_ai').replace('{a}',fmt(a1)+(a2&&a2!==a1?'–'+fmt(a2):'')):'')+(result.confidence&&t('conf')[result.confidence]?' · '+t('conf')[result.confidence]:'');
+  var box=$('items');box.innerHTML='';
+  list.forEach(function(it,i){var row=document.createElement('label');row.className='item'+(it.keep?' kept':'');row.htmlFor='it'+i;var cb=document.createElement('input');cb.type='checkbox';cb.id='it'+i;cb.checked=!it.keep;cb.addEventListener('change',function(){it.keep=!cb.checked;row.classList.toggle('kept',it.keep);totals()});var n=document.createElement('span');n.className='nm';n.textContent=(it.count>1?it.count+' × ':'')+nm(it);var v=document.createElement('span');v.className='vol';v.textContent=fmt(it.m3*it.count)+' '+t('m3');row.append(cb,n,v);box.appendChild(row)});
+  var qs=$('qs');qs.innerHTML='';(result.questions||[]).slice(0,3).forEach(function(q){var p=document.createElement('p');p.className='q';p.style.margin='0';p.textContent='❓ '+q;qs.appendChild(p)});
+  if(result.note){var n2=document.createElement('p');n2.className='muted';n2.style.margin='0';n2.textContent=result.note;qs.appendChild(n2)}
+  totals()}
+function totals(){var v=list.filter(function(i){return!i.keep}).reduce(function(s,i){return s+i.m3*i.count},0);
+  $('vol').textContent='≈ '+fmt(v)+' '+t('m3');var n=Math.max(1,Math.ceil(v/10));$('loads').textContent=(n===1?t('loads1'):t('loadsN')).replace('{n}',n);
+  var take=list.filter(function(i){return!i.keep}).map(function(i){return(i.count>1?i.count+'× ':'')+nm(i)}),keep=list.filter(function(i){return i.keep}).map(nm);
+  var area=$('area').value?$('area').value+' m²':(num(result.area_min)?'~'+fmt(num(result.area_min))+'–'+fmt(num(result.area_max))+' m²':'');
+  var txt=[t('sumTitle'),t('sumRoom')+': '+(result.room||'—')+(area?', '+area:''),t('sumFloor')+': '+t('floors')[+$('floor').value],t('sumTake')+': '+(take.join(', ')||'—'),t('sumKeep')+': '+(keep.join(', ')||t('nothing')),t('sumVol')+': ≈ '+fmt(v)+' '+t('m3')].join('\n');
+  $('summary').value=txt;$('wa').href='https://wa.me/'+WA+'?text='+encodeURIComponent(txt)}
+$('floor').addEventListener('change',function(){if(result)totals()});
+$('copy').addEventListener('click',function(){navigator.clipboard.writeText($('summary').value).then(function(){$('copy').textContent=t('copied')},function(){$('summary').select()})});
+applyLang();
+})();
+</script>
+</body>
+</html>
