@@ -89,7 +89,7 @@ T = {
   'Jetzt kostenloses Angebot holen': 'Получите бесплатное предложение',
   'Schicken Sie 3–5 Fotos der Räume per WhatsApp. Wir melden uns noch am selben Tag mit einem Festpreis.': 'Пришлите 3–5 фото помещений в WhatsApp. В тот же день мы ответим с фиксированной ценой.',
   'WhatsApp schreiben': 'Написать в WhatsApp',
-  'Telefon / WhatsApp': 'Телефон / WhatsApp',
+  'Telefon / WhatsApp · Deutsch': 'Телефон / WhatsApp · на немецком',
   'Erreichbar': 'Время работы',
   'Mo–Sa, 8–19 Uhr': 'Пн–Сб, 8–19 ч',
   '© 2026 Iltan Räumung · Entrümpelung in Stade &amp; Hamburg': '© 2026 Iltan Räumung · освобождение помещений в Штаде и Гамбурге',
@@ -185,7 +185,7 @@ T = {
   'Jetzt kostenloses Angebot holen': 'Cereți acum o ofertă gratuită',
   'Schicken Sie 3–5 Fotos der Räume per WhatsApp. Wir melden uns noch am selben Tag mit einem Festpreis.': 'Trimiteți 3–5 poze cu încăperile pe WhatsApp. Vă răspundem în aceeași zi cu un preț fix.',
   'WhatsApp schreiben': 'Scrie pe WhatsApp',
-  'Telefon / WhatsApp': 'Telefon / WhatsApp',
+  'Telefon / WhatsApp · Deutsch': 'Telefon / WhatsApp · în germană',
   'Erreichbar': 'Program',
   'Mo–Sa, 8–19 Uhr': 'Lun–Sâm, 8–19',
   '© 2026 Iltan Räumung · Entrümpelung in Stade &amp; Hamburg': '© 2026 Iltan Räumung · debarasări în Stade și Hamburg',
@@ -227,6 +227,11 @@ def build(lang, src):
         legal = legal[:legal.index('<footer>')]
         H={'ru':'Освобождение помещений по <em>фиксированной цене</em>, сдаём чисто убранным.','ro':'Debarasare la <em>preț fix</em>, predat curat.'}[lang]
         main = main.replace('>Entrümpelung zum <em>Festpreis</em>, besenrein übergeben.<', '>'+H+'<')
+        # RU/RO visitors get the Russian/Romanian-speaking number (contact list keeps both)
+        m1, m2 = main.split('<div class="ph-de">', 1); keep, m3 = m2.split('</div>', 1)
+        sw = lambda x: x.replace('4915111143537', '4917687800657').replace('0151 11143537', '0176 87800657')
+        main = sw(m1) + '<div class="ph-de">' + keep + '</div>' + sw(m3)
+        foot = sw(foot)
         main = main.replace('<label for="qm">Fläche (m²)', '<label for="qm">'+T[lang]['Fläche (m²)'])
         for de_txt in sorted(T[lang], key=len, reverse=True):
             tr = T[lang][de_txt]
