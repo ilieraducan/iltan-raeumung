@@ -84,6 +84,7 @@ section{padding-block:56px}
 
 /* services */
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.grid .card.wide{grid-column:1/-1;border-left:4px solid var(--accent)}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:8px;align-content:start}
 .card p{color:var(--muted);font-size:16px}
 
@@ -202,6 +203,7 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
       <div class="card"><h3>Messie-Wohnungen</h3><p>Diskrete Räumung stark vermüllter Wohnungen, mit Grundreinigung nach Absprache.</p></div>
       <div class="card"><h3>Gewerbe &amp; Büro</h3><p>Büros, Lager und Ladenflächen – Möbel, Akten, Elektrogeräte, Regale.</p></div>
       <div class="card"><h3>Sperrmüll-Abholung</h3><p>Einzelne Möbel, Matratzen oder Elektrogeräte holen wir direkt bei Ihnen ab.</p></div>
+      <div class="card wide"><h3>Container für Restmüll</h3><p>Bei größeren Räumungen bestellen wir einen Container bei einem zugelassenen Entsorgungsfachbetrieb. Der Müll wird dort fachgerecht sortiert und verwertet – Sie haben keinen Aufwand.</p></div>
     </div>
   </div>
 </section>
@@ -349,7 +351,7 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
     var qm=Math.max(5,Math.min(500,+$('qm').value||0));
     var et=+$('etage').value, obj=$('obj').value;
     var vol=Math.max(2,Math.round(qm*dens[fill]*objF[obj]));
-    $('price').textContent='ca. '+vol+' m³';
+    $('price').textContent="ca. "+vol+' m³';
     var loads=Math.max(1,Math.ceil(vol/10));
     $('vol').textContent="entspricht etwa "+loads+(loads>1?" Transporterladungen":" Transporterladung")+" \u00b7 unverbindliche Sch\u00e4tzung";
     var objName=$('obj').selectedOptions[0].text;

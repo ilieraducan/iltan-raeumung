@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Raumscan – Iltan Räumung</title>
 <meta name="description" content="Räume per Video filmen – KI erkennt Möbel und schätzt die Menge für Ihre Entrümpelung in Stade und Hamburg.">
+<link rel="canonical" href="https://iltan-raeumung.de/scan/">
+<meta property="og:title" content="Raumscan – Iltan Räumung">
+<meta property="og:description" content="Raum filmen, KI schätzt die Menge – Entrümpelung in Stade und Hamburg.">
 <meta name="theme-color" content="#17332D">
 <link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
 <link rel="apple-touch-icon" href="../icon-180.png">
@@ -168,7 +171,7 @@ textarea{width:100%;min-height:130px;font:14px/1.45 var(--f-mono);padding:10px;b
     </div>
     <p class="muted" style="margin:0" id="contact"></p>
   </section>
-  <p class="muted" style="margin-top:20px"><a href="../#impressum">Impressum</a> · <a href="../#datenschutz">Datenschutz</a></p>
+  <p class="muted" style="margin-top:20px"><a id="imp" href="../#impressum">Impressum</a> · <a id="dsg" href="../#datenschutz">Datenschutz</a></p>
 </main>
 <script>
 (function(){
@@ -186,7 +189,8 @@ if(!T[lang]) lang=(navigator.language||'de').slice(0,2); if(!T[lang]) lang='de';
 var t=function(k){return T[lang][k]};
 var frames=[],result=null,list=[];
 function applyLang(){
-  document.documentElement.lang=lang;
+  document.documentElement.lang=lang;document.title=t('h1')+' – Iltan Räumung';
+  var pre=lang==='de'?'../':'../'+lang+'/';$('imp').href=pre+'#impressum';$('dsg').href=pre+'#datenschutz';
   document.querySelectorAll('[data-t]').forEach(function(el){el.textContent=t(el.dataset.t)});
   document.querySelectorAll('.langs button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.l===lang?'true':'false')});
   var sel=$('floor'),v=sel.value||'0'; sel.innerHTML=''; t('floors').forEach(function(f,i){var o=document.createElement('option');o.value=i;o.textContent=f;sel.appendChild(o)}); sel.value=v;

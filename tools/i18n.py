@@ -11,6 +11,8 @@ T = {
   'Wohnungen, Häuser, Keller, Dachböden und Gewerbeflächen. Schicken Sie uns ein paar Fotos – Sie bekommen innerhalb von 24 Stunden ein verbindliches Angebot.': 'Квартиры, дома, подвалы, чердаки и коммерческие помещения. Пришлите нам несколько фото — в течение 24 часов вы получите точное предложение.',
   'Fotos per WhatsApp senden': 'Отправить фото в WhatsApp',
   'Kosten schätzen': 'Оценить объём',
+  'Container für Restmüll': 'Контейнер для мусора',
+  'Bei größeren Räumungen bestellen wir einen Container bei einem zugelassenen Entsorgungsfachbetrieb. Der Müll wird dort fachgerecht sortiert und verwertet – Sie haben keinen Aufwand.': 'При больших объёмах заказываем контейнер у лицензированной фирмы по утилизации. Там мусор правильно сортируют и перерабатывают — вам ни о чём не нужно беспокоиться.',
   '💬 Schreiben Sie uns per WhatsApp – unser Mitarbeiter ruft Sie zurück.': '💬 Напишите нам в WhatsApp — наш сотрудник вам перезвонит.',
   'WhatsApp – wir rufen zurück': 'WhatsApp — перезвоним',
   '🎥 Per Video schätzen': '🎥 Оценка по видео',
@@ -72,7 +74,7 @@ T = {
   '2. Etage': '3-й этаж',
   '3. Etage oder höher': '4-й этаж и выше',
   'Geschätzte Menge Räumgut': 'Примерный объём вывоза',
-  'entspricht etwa 2 Transporterladungen · unverbindliche Schätzung': 'примерно 2 загрузки фургона · предварительная оценка',
+  'entspricht etwa 2 Transporterladungen · unverbindliche Schätzung': 'рейсов фургона: ~2 · предварительная оценка',
   'Festpreis per WhatsApp anfragen': 'Узнать цену в WhatsApp',
   'Einsatzgebiet': 'Где мы работаем',
   'Stade, Hamburg und rund 100 km Umkreis': 'Штаде, Гамбург и около 100 км вокруг',
@@ -109,6 +111,8 @@ T = {
   'Wohnungen, Häuser, Keller, Dachböden und Gewerbeflächen. Schicken Sie uns ein paar Fotos – Sie bekommen innerhalb von 24 Stunden ein verbindliches Angebot.': 'Apartamente, case, pivnițe, poduri și spații comerciale. Trimiteți-ne câteva fotografii – primiți o ofertă fermă în 24 de ore.',
   'Fotos per WhatsApp senden': 'Trimite poze pe WhatsApp',
   'Kosten schätzen': 'Estimează volumul',
+  'Container für Restmüll': 'Container pentru gunoi',
+  'Bei größeren Räumungen bestellen wir einen Container bei einem zugelassenen Entsorgungsfachbetrieb. Der Müll wird dort fachgerecht sortiert und verwertet – Sie haben keinen Aufwand.': 'La volume mari comandăm un container de la o firmă autorizată de gestionare a deșeurilor. Acolo gunoiul este sortat și reciclat corect — nu aveți nicio grijă.',
   '💬 Schreiben Sie uns per WhatsApp – unser Mitarbeiter ruft Sie zurück.': '💬 Scrieți-ne pe WhatsApp — un coleg vă sună înapoi.',
   'WhatsApp – wir rufen zurück': 'WhatsApp — vă sunăm noi',
   '🎥 Per Video schätzen': '🎥 Evaluare după video',
@@ -201,9 +205,9 @@ T = {
  },
 }
 JS = {
- 'de': {'loads1':'entspricht etwa ','load':' Transporterladung','loads':' Transporterladungen','est':' · unverbindliche Schätzung','msg':'Hallo Iltan Räumung, ich möchte einen Festpreis anfragen: ','fill':', Füllgrad ','calc':'. Rechner-Schätzung: ','tail':' Räumgut. Fotos schicke ich gleich.','hero':'Hallo Iltan Räumung, ich möchte ein Angebot für eine Entrümpelung.','f':{'leicht':'wenig','normal':'normal','voll':'sehr voll'}},
- 'ru': {'loads1':'примерно ','load':' загрузка фургона','loads':' загрузки фургона','est':' · предварительная оценка','msg':'Здравствуйте, Iltan Räumung! Хочу узнать фиксированную цену: ','fill':', заполненность: ','calc':'. Оценка калькулятора: ','tail':'. Фото пришлю сейчас.','hero':'Здравствуйте, Iltan Räumung! Хочу получить предложение на вывоз (пишу по-русски).','f':{'leicht':'немного','normal':'средне','voll':'очень много'}},
- 'ro': {'loads1':'aproximativ ','load':' transport cu duba','loads':' transporturi cu duba','est':' · estimare orientativă','msg':'Bună ziua, Iltan Räumung! Aș dori un preț fix: ','fill':', grad de umplere: ','calc':'. Estimare calculator: ','tail':'. Trimit pozele imediat.','hero':'Bună ziua, Iltan Räumung! Aș dori o ofertă pentru debarasare (scriu în română).','f':{'leicht':'puțin','normal':'normal','voll':'foarte plin'}},
+ 'de': {'loads1':'entspricht etwa ','load':' Transporterladung','loads':' Transporterladungen','est':' · unverbindliche Schätzung','msg':'Hallo Iltan Räumung, ich möchte einen Festpreis anfragen: ','fill':', Füllgrad ','calc':'. Rechner-Schätzung: ','tail':' Räumgut. Fotos schicke ich gleich.','hero':'Hallo Iltan Räumung, ich möchte ein Angebot für eine Entrümpelung.','ca':'ca. ','f':{'leicht':'wenig','normal':'normal','voll':'sehr voll'}},
+ 'ru': {'loads1':'рейсов фургона: ~','load':'','loads':'','ca':'≈ ','est':' · предварительная оценка','msg':'Здравствуйте, Iltan Räumung! Хочу узнать фиксированную цену: ','fill':', заполненность: ','calc':'. Оценка калькулятора: ','tail':'. Фото пришлю сейчас.','hero':'Здравствуйте, Iltan Räumung! Хочу получить предложение на вывоз (пишу по-русски).','f':{'leicht':'немного','normal':'средне','voll':'очень много'}},
+ 'ro': {'loads1':'aproximativ ','load':' transport cu duba','loads':' transporturi cu duba','est':' · estimare orientativă','msg':'Bună ziua, Iltan Räumung! Aș dori un preț fix: ','fill':', grad de umplere: ','calc':'. Estimare calculator: ','tail':'. Trimit pozele imediat.','hero':'Bună ziua, Iltan Räumung! Aș dori o ofertă pentru debarasare (scriu în română).','ca':'cca. ','f':{'leicht':'puțin','normal':'normal','voll':'foarte plin'}},
 }
 META = {
  'de': ('Iltan Räumung','Entrümpelung, Haushaltsauflösung und Kellerräumung in Stade, Buxtehude und Hamburg. Kostenlose Besichtigung, Festpreis, besenreine Übergabe.'),
@@ -262,6 +266,7 @@ def build(lang, src):
     from urllib.parse import quote
     s = s.replace(hero_de, quote(j['hero']))
     if pre: s = s.replace('href="scan/"', f'href="../scan/?lang={lang}"')
+    s = s.replace("$('price').textContent='ca. '+vol", "$('price').textContent="+json.dumps(j['ca'],ensure_ascii=False)+"+vol")
     s = s.replace("toLocaleString('de-DE')", f"toLocaleString('{ {'de':'de-DE','ru':'ru-RU','ro':'ro-RO'}[lang] }')")
     return s
 

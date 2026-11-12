@@ -84,6 +84,7 @@ section{padding-block:56px}
 
 /* services */
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.grid .card.wide{grid-column:1/-1;border-left:4px solid var(--accent)}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:8px;align-content:start}
 .card p{color:var(--muted);font-size:16px}
 
@@ -202,6 +203,7 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
       <div class="card"><h3>Locuințe foarte aglomerate</h3><p>Golire discretă a locuințelor foarte încărcate, cu curățenie generală la cerere.</p></div>
       <div class="card"><h3>Firme și birouri</h3><p>Birouri, depozite și magazine – mobilier, dosare, aparate electrice, rafturi.</p></div>
       <div class="card"><h3>Ridicare deșeuri voluminoase</h3><p>Ridicăm de la dumneavoastră mobilă, saltele sau aparate electrice.</p></div>
+      <div class="card wide"><h3>Container pentru gunoi</h3><p>La volume mari comandăm un container de la o firmă autorizată de gestionare a deșeurilor. Acolo gunoiul este sortat și reciclat corect — nu aveți nicio grijă.</p></div>
     </div>
   </div>
 </section>
@@ -350,7 +352,7 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
     var qm=Math.max(5,Math.min(500,+$('qm').value||0));
     var et=+$('etage').value, obj=$('obj').value;
     var vol=Math.max(2,Math.round(qm*dens[fill]*objF[obj]));
-    $('price').textContent='ca. '+vol+' m³';
+    $('price').textContent="cca. "+vol+' m³';
     var loads=Math.max(1,Math.ceil(vol/10));
     $('vol').textContent="aproximativ "+loads+(loads>1?" transporturi cu duba":" transport cu duba")+" \u00b7 estimare orientativ\u0103";
     var objName=$('obj').selectedOptions[0].text;
