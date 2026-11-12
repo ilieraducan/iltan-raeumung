@@ -35,7 +35,7 @@ T = {
   'Sondermüll': 'Опасные отходы',
   'nach Aufwand': 'по объёму работ',
   'Richtpreis': 'Примерная цена',
-  'Richtpreise. Den verbindlichen Festpreis nennen wir Ihnen nach Fotos oder Besichtigung. Etage ohne Aufzug: +5–10 % je Etage. Verwertbare Gegenstände rechnen wir an.': 'Ориентировочные цены. Точную фиксированную цену назовём после фото или осмотра. Этаж без лифта: +5–10 % за каждый этаж. Стоимость пригодных вещей засчитываем.',
+  'Alle Preise inkl. 19 % MwSt. Richtpreise. Den verbindlichen Festpreis nennen wir Ihnen nach Fotos oder Besichtigung. Etage ohne Aufzug: +5–10 % je Etage. Verwertbare Gegenstände rechnen wir an.': 'Все цены с НДС 19 %. Ориентировочные цены. Точную фиксированную цену назовём после фото или осмотра. Этаж без лифта: +5–10 % за каждый этаж. Стоимость пригодных вещей засчитываем.',
   'Container für Restmüll': 'Контейнер для мусора',
   'Bei größeren Räumungen bestellen wir einen Container bei einem zugelassenen Entsorgungsfachbetrieb. Der Müll wird dort fachgerecht sortiert und verwertet – Sie haben keinen Aufwand.': 'При больших объёмах заказываем контейнер у лицензированной фирмы по утилизации. Там мусор правильно сортируют и перерабатывают — вам ни о чём не нужно беспокоиться.',
   '💬 Schreiben Sie uns per WhatsApp – unser Mitarbeiter ruft Sie zurück.': '💬 Напишите нам в WhatsApp — наш сотрудник вам перезвонит.',
@@ -160,7 +160,7 @@ T = {
   'Sondermüll': 'Deșeuri periculoase',
   'nach Aufwand': 'după volum',
   'Richtpreis': 'Preț orientativ',
-  'Richtpreise. Den verbindlichen Festpreis nennen wir Ihnen nach Fotos oder Besichtigung. Etage ohne Aufzug: +5–10 % je Etage. Verwertbare Gegenstände rechnen wir an.': 'Prețuri orientative. Prețul fix vi-l comunicăm după poze sau evaluare. Etaj fără lift: +5–10 % pe etaj. Obiectele valorificabile le scădem din preț.',
+  'Alle Preise inkl. 19 % MwSt. Richtpreise. Den verbindlichen Festpreis nennen wir Ihnen nach Fotos oder Besichtigung. Etage ohne Aufzug: +5–10 % je Etage. Verwertbare Gegenstände rechnen wir an.': 'Toate prețurile includ TVA 19 %. Prețuri orientative. Prețul fix vi-l comunicăm după poze sau evaluare. Etaj fără lift: +5–10 % pe etaj. Obiectele valorificabile le scădem din preț.',
   'Container für Restmüll': 'Container pentru gunoi',
   'Bei größeren Räumungen bestellen wir einen Container bei einem zugelassenen Entsorgungsfachbetrieb. Der Müll wird dort fachgerecht sortiert und verwertet – Sie haben keinen Aufwand.': 'La volume mari comandăm un container de la o firmă autorizată de gestionare a deșeurilor. Acolo gunoiul este sortat și reciclat corect — nu aveți nicio grijă.',
   '💬 Schreiben Sie uns per WhatsApp – unser Mitarbeiter ruft Sie zurück.': '💬 Scrieți-ne pe WhatsApp — un coleg vă sună înapoi.',
@@ -290,7 +290,7 @@ def build(lang, src):
         sw = lambda x: x.replace('4915111143537', '4917687800657').replace('0151 11143537', '0176 87800657')
         main = sw(m1) + '<div class="ph-de">' + keep + '</div>' + sw(m3)
         foot = sw(foot)
-        main = re.sub(r'<td>ab ([0-9.]+ €(?:/m²)?)</td>', lambda m: '<td>'+{'ru':'от ','ro':'de la '}[lang]+(m.group(1) if lang=='ro' else m.group(1).replace('.', ' ').replace('/m²','/м²'))+'</td>', main)
+        main = re.sub(r'<td>ab ([0-9.,]+ €(?:/m²)?)</td>', lambda m: '<td>'+{'ru':'от ','ro':'de la '}[lang]+(m.group(1) if lang=='ro' else m.group(1).replace('.', ' ').replace('/m²','/м²'))+'</td>', main)
         main = main.replace('<label for="qm">Fläche (m²)', '<label for="qm">'+T[lang]['Fläche (m²)'])
         for de_txt in sorted(T[lang], key=len, reverse=True):
             tr = T[lang][de_txt]

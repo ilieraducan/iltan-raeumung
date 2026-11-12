@@ -273,7 +273,7 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
           <div class="big" id="price">ca. 18 m³</div>
           <small id="vol">aproximativ 2 transporturi cu duba · estimare orientativă</small>
           <small style="margin-top:8px">Preț orientativ</small>
-          <div class="big" id="eur">≈ 1.050 – 1.700 €</div>
+          <div class="big" id="eur">≈ 1.250 – 2.050 €</div>
         </div>
         <a class="btn btn-main" id="wa-calc" href="#" style="justify-content:center">Cere prețul pe WhatsApp</a>
         <a class="btn btn-ghost" href="../scan/?lang=ro" style="justify-content:center">Mai exact: evaluare după video</a>
@@ -283,34 +283,34 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
       <div>
         <h3>Prețuri orientative</h3>
         <table class="prices">
-          <tr><td>Pivniță până la 10 m²</td><td>de la 250 €</td></tr>
-          <tr><td>Garaj</td><td>de la 300 €</td></tr>
-          <tr><td>Șopron / căsuță de grădină</td><td>de la 300 €</td></tr>
-          <tr><td>Pod</td><td>de la 400 €</td></tr>
-          <tr><td>Garsonieră</td><td>de la 600 €</td></tr>
-          <tr><td>Apartament 2 camere</td><td>de la 1.000 €</td></tr>
-          <tr><td>Apartament 3 camere</td><td>de la 1.500 €</td></tr>
-          <tr><td>Casă până la 120 m²</td><td>de la 2.500 €</td></tr>
+          <tr><td>Pivniță până la 10 m²</td><td>de la 300 €</td></tr>
+          <tr><td>Garaj</td><td>de la 360 €</td></tr>
+          <tr><td>Șopron / căsuță de grădină</td><td>de la 360 €</td></tr>
+          <tr><td>Pod</td><td>de la 480 €</td></tr>
+          <tr><td>Garsonieră</td><td>de la 710 €</td></tr>
+          <tr><td>Apartament 2 camere</td><td>de la 1.190 €</td></tr>
+          <tr><td>Apartament 3 camere</td><td>de la 1.790 €</td></tr>
+          <tr><td>Casă până la 120 m²</td><td>de la 2.980 €</td></tr>
           <tr><td>Locuință foarte aglomerată</td><td>după evaluare</td></tr>
         </table>
       </div>
       <div>
         <h3>Servicii suplimentare</h3>
         <table class="prices">
-          <tr><td>Deșeuri voluminoase pe m³</td><td>de la 120 €</td></tr>
-          <tr><td>Demontare bucătărie</td><td>de la 150 €</td></tr>
-          <tr><td>Demontare dulap încastrat</td><td>de la 150 €</td></tr>
-          <tr><td>Îndepărtare mochetă</td><td>de la 5 €/m²</td></tr>
-          <tr><td>Îndepărtare parchet laminat</td><td>de la 8 €/m²</td></tr>
-          <tr><td>Îndepărtare tapet</td><td>de la 6 €/m²</td></tr>
-          <tr><td>Curățenie după debarasare</td><td>de la 100 €</td></tr>
-          <tr><td>Transport</td><td>de la 80 €</td></tr>
-          <tr><td>Oră de lucru per angajat</td><td>de la 35 €</td></tr>
+          <tr><td>Deșeuri voluminoase pe m³</td><td>de la 145 €</td></tr>
+          <tr><td>Demontare bucătărie</td><td>de la 180 €</td></tr>
+          <tr><td>Demontare dulap încastrat</td><td>de la 180 €</td></tr>
+          <tr><td>Îndepărtare mochetă</td><td>de la 6 €/m²</td></tr>
+          <tr><td>Îndepărtare parchet laminat</td><td>de la 9,50 €/m²</td></tr>
+          <tr><td>Îndepărtare tapet</td><td>de la 7 €/m²</td></tr>
+          <tr><td>Curățenie după debarasare</td><td>de la 120 €</td></tr>
+          <tr><td>Transport</td><td>de la 95 €</td></tr>
+          <tr><td>Oră de lucru per angajat</td><td>de la 42 €</td></tr>
           <tr><td>Deșeuri periculoase</td><td>după volum</td></tr>
         </table>
       </div>
     </div>
-    <p class="note">Prețuri orientative. Prețul fix vi-l comunicăm după poze sau evaluare. Etaj fără lift: +5–10 % pe etaj. Obiectele valorificabile le scădem din preț.</p>
+    <p class="note">Toate prețurile includ TVA 19 %. Prețuri orientative. Prețul fix vi-l comunicăm după poze sau evaluare. Etaj fără lift: +5–10 % pe etaj. Obiectele valorificabile le scădem din preț.</p>
   </div>
 </section>
 
@@ -430,7 +430,7 @@ send.addEventListener('click',function(){send.disabled=true;st.textContent='';
     var vol=Math.max(2,Math.round(qm*dens[fill]*objF[obj]));
     $('price').textContent="cca. "+vol+' m³';
     var r50=function(n){return (Math.round(n/50)*50).toLocaleString('ro-RO')};var sf=1+0.075*et;
-    $('eur').textContent='≈ '+r50(Math.max(250,(vol*55+80)*sf))+' – '+r50(Math.max(350,(vol*90+80)*sf))+' €';
+    $('eur').textContent='≈ '+r50(Math.max(300,(vol*65+95)*sf))+' – '+r50(Math.max(420,(vol*107+95)*sf))+' €';
     var loads=Math.max(1,Math.ceil(vol/10));
     $('vol').textContent="aproximativ "+loads+(loads>1?" transporturi cu duba":" transport cu duba")+" \u00b7 estimare orientativ\u0103";
     var objName=$('obj').selectedOptions[0].text;

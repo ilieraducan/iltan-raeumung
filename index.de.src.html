@@ -264,7 +264,7 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
           <div class="big" id="price">ca. 18 m³</div>
           <small id="vol">entspricht etwa 2 Transporterladungen · unverbindliche Schätzung</small>
           <small style="margin-top:8px">Richtpreis</small>
-          <div class="big" id="eur">≈ 1.050 – 1.700 €</div>
+          <div class="big" id="eur">≈ 1.250 – 2.050 €</div>
         </div>
         <a class="btn btn-main" id="wa-calc" href="#" style="justify-content:center">Festpreis per WhatsApp anfragen</a>
         <a class="btn btn-ghost" href="scan/" style="justify-content:center">Genauer: Raum per Video scannen</a>
@@ -274,34 +274,34 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
       <div>
         <h3>Richtpreise Räumung</h3>
         <table class="prices">
-          <tr><td>Keller bis 10 m²</td><td>ab 250 €</td></tr>
-          <tr><td>Garage</td><td>ab 300 €</td></tr>
-          <tr><td>Schuppen / Gartenhaus</td><td>ab 300 €</td></tr>
-          <tr><td>Dachboden</td><td>ab 400 €</td></tr>
-          <tr><td>1-Zimmer-Wohnung</td><td>ab 600 €</td></tr>
-          <tr><td>2-Zimmer-Wohnung</td><td>ab 1.000 €</td></tr>
-          <tr><td>3-Zimmer-Wohnung</td><td>ab 1.500 €</td></tr>
-          <tr><td>Haus bis 120 m²</td><td>ab 2.500 €</td></tr>
+          <tr><td>Keller bis 10 m²</td><td>ab 300 €</td></tr>
+          <tr><td>Garage</td><td>ab 360 €</td></tr>
+          <tr><td>Schuppen / Gartenhaus</td><td>ab 360 €</td></tr>
+          <tr><td>Dachboden</td><td>ab 480 €</td></tr>
+          <tr><td>1-Zimmer-Wohnung</td><td>ab 710 €</td></tr>
+          <tr><td>2-Zimmer-Wohnung</td><td>ab 1.190 €</td></tr>
+          <tr><td>3-Zimmer-Wohnung</td><td>ab 1.790 €</td></tr>
+          <tr><td>Haus bis 120 m²</td><td>ab 2.980 €</td></tr>
           <tr><td>Messie-Wohnung</td><td>nach Besichtigung</td></tr>
         </table>
       </div>
       <div>
         <h3>Zusatzleistungen</h3>
         <table class="prices">
-          <tr><td>Sperrmüll je m³</td><td>ab 120 €</td></tr>
-          <tr><td>Küche demontieren</td><td>ab 150 €</td></tr>
-          <tr><td>Einbauschrank demontieren</td><td>ab 150 €</td></tr>
-          <tr><td>Teppich entfernen</td><td>ab 5 €/m²</td></tr>
-          <tr><td>Laminat entfernen</td><td>ab 8 €/m²</td></tr>
-          <tr><td>Tapeten entfernen</td><td>ab 6 €/m²</td></tr>
-          <tr><td>Besenreine Übergabe</td><td>ab 100 €</td></tr>
-          <tr><td>Transportpauschale</td><td>ab 80 €</td></tr>
-          <tr><td>Arbeitsstunde pro Mitarbeiter</td><td>ab 35 €</td></tr>
+          <tr><td>Sperrmüll je m³</td><td>ab 145 €</td></tr>
+          <tr><td>Küche demontieren</td><td>ab 180 €</td></tr>
+          <tr><td>Einbauschrank demontieren</td><td>ab 180 €</td></tr>
+          <tr><td>Teppich entfernen</td><td>ab 6 €/m²</td></tr>
+          <tr><td>Laminat entfernen</td><td>ab 9,50 €/m²</td></tr>
+          <tr><td>Tapeten entfernen</td><td>ab 7 €/m²</td></tr>
+          <tr><td>Besenreine Übergabe</td><td>ab 120 €</td></tr>
+          <tr><td>Transportpauschale</td><td>ab 95 €</td></tr>
+          <tr><td>Arbeitsstunde pro Mitarbeiter</td><td>ab 42 €</td></tr>
           <tr><td>Sondermüll</td><td>nach Aufwand</td></tr>
         </table>
       </div>
     </div>
-    <p class="note">Richtpreise. Den verbindlichen Festpreis nennen wir Ihnen nach Fotos oder Besichtigung. Etage ohne Aufzug: +5–10 % je Etage. Verwertbare Gegenstände rechnen wir an.</p>
+    <p class="note">Alle Preise inkl. 19 % MwSt. Richtpreise. Den verbindlichen Festpreis nennen wir Ihnen nach Fotos oder Besichtigung. Etage ohne Aufzug: +5–10 % je Etage. Verwertbare Gegenstände rechnen wir an.</p>
   </div>
 </section>
 
@@ -419,7 +419,7 @@ send.addEventListener('click',function(){send.disabled=true;st.textContent='';
     var vol=Math.max(2,Math.round(qm*dens[fill]*objF[obj]));
     $('price').textContent='ca. '+vol+' m³';
     var r50=function(n){return (Math.round(n/50)*50).toLocaleString('de-DE')};var sf=1+0.075*et;
-    $('eur').textContent='≈ '+r50(Math.max(250,(vol*55+80)*sf))+' – '+r50(Math.max(350,(vol*90+80)*sf))+' €';
+    $('eur').textContent='≈ '+r50(Math.max(300,(vol*65+95)*sf))+' – '+r50(Math.max(420,(vol*107+95)*sf))+' €';
     var loads=Math.max(1,Math.ceil(vol/10));
     $('vol').textContent='entspricht etwa '+loads+' Transporterladung'+(loads>1?'en':'')+' · unverbindliche Schätzung';
     var objName=$('obj').selectedOptions[0].text;

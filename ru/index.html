@@ -273,7 +273,7 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
           <div class="big" id="price">ca. 18 m³</div>
           <small id="vol">рейсов фургона: ~2 · предварительная оценка</small>
           <small style="margin-top:8px">Примерная цена</small>
-          <div class="big" id="eur">≈ 1.050 – 1.700 €</div>
+          <div class="big" id="eur">≈ 1.250 – 2.050 €</div>
         </div>
         <a class="btn btn-main" id="wa-calc" href="#" style="justify-content:center">Узнать цену в WhatsApp</a>
         <a class="btn btn-ghost" href="../scan/?lang=ru" style="justify-content:center">Точнее: оценка по видео</a>
@@ -283,34 +283,34 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
       <div>
         <h3>Ориентировочные цены</h3>
         <table class="prices">
-          <tr><td>Подвал до 10 м²</td><td>от 250 €</td></tr>
-          <tr><td>Гараж</td><td>от 300 €</td></tr>
-          <tr><td>Сарай / садовый домик</td><td>от 300 €</td></tr>
-          <tr><td>Чердак</td><td>от 400 €</td></tr>
-          <tr><td>1-комнатная квартира</td><td>от 600 €</td></tr>
-          <tr><td>2-комнатная квартира</td><td>от 1 000 €</td></tr>
-          <tr><td>3-комнатная квартира</td><td>от 1 500 €</td></tr>
-          <tr><td>Дом до 120 м²</td><td>от 2 500 €</td></tr>
+          <tr><td>Подвал до 10 м²</td><td>от 300 €</td></tr>
+          <tr><td>Гараж</td><td>от 360 €</td></tr>
+          <tr><td>Сарай / садовый домик</td><td>от 360 €</td></tr>
+          <tr><td>Чердак</td><td>от 480 €</td></tr>
+          <tr><td>1-комнатная квартира</td><td>от 710 €</td></tr>
+          <tr><td>2-комнатная квартира</td><td>от 1 190 €</td></tr>
+          <tr><td>3-комнатная квартира</td><td>от 1 790 €</td></tr>
+          <tr><td>Дом до 120 м²</td><td>от 2 980 €</td></tr>
           <tr><td>Захламлённая квартира</td><td>после осмотра</td></tr>
         </table>
       </div>
       <div>
         <h3>Дополнительные услуги</h3>
         <table class="prices">
-          <tr><td>Крупногабаритный мусор за 1 м³</td><td>от 120 €</td></tr>
-          <tr><td>Демонтаж кухни</td><td>от 150 €</td></tr>
-          <tr><td>Демонтаж встроенного шкафа</td><td>от 150 €</td></tr>
-          <tr><td>Снятие коврового покрытия</td><td>от 5 €/м²</td></tr>
-          <tr><td>Демонтаж ламината</td><td>от 8 €/м²</td></tr>
-          <tr><td>Снятие обоев</td><td>от 6 €/м²</td></tr>
-          <tr><td>Уборка после вывоза</td><td>от 100 €</td></tr>
-          <tr><td>Транспорт</td><td>от 80 €</td></tr>
-          <tr><td>Час работы одного сотрудника</td><td>от 35 €</td></tr>
+          <tr><td>Крупногабаритный мусор за 1 м³</td><td>от 145 €</td></tr>
+          <tr><td>Демонтаж кухни</td><td>от 180 €</td></tr>
+          <tr><td>Демонтаж встроенного шкафа</td><td>от 180 €</td></tr>
+          <tr><td>Снятие коврового покрытия</td><td>от 6 €/м²</td></tr>
+          <tr><td>Демонтаж ламината</td><td>от 9,50 €/м²</td></tr>
+          <tr><td>Снятие обоев</td><td>от 7 €/м²</td></tr>
+          <tr><td>Уборка после вывоза</td><td>от 120 €</td></tr>
+          <tr><td>Транспорт</td><td>от 95 €</td></tr>
+          <tr><td>Час работы одного сотрудника</td><td>от 42 €</td></tr>
           <tr><td>Опасные отходы</td><td>по объёму работ</td></tr>
         </table>
       </div>
     </div>
-    <p class="note">Ориентировочные цены. Точную фиксированную цену назовём после фото или осмотра. Этаж без лифта: +5–10 % за каждый этаж. Стоимость пригодных вещей засчитываем.</p>
+    <p class="note">Все цены с НДС 19 %. Ориентировочные цены. Точную фиксированную цену назовём после фото или осмотра. Этаж без лифта: +5–10 % за каждый этаж. Стоимость пригодных вещей засчитываем.</p>
   </div>
 </section>
 
@@ -430,7 +430,7 @@ send.addEventListener('click',function(){send.disabled=true;st.textContent='';
     var vol=Math.max(2,Math.round(qm*dens[fill]*objF[obj]));
     $('price').textContent="≈ "+vol+' m³';
     var r50=function(n){return (Math.round(n/50)*50).toLocaleString('ru-RU')};var sf=1+0.075*et;
-    $('eur').textContent='≈ '+r50(Math.max(250,(vol*55+80)*sf))+' – '+r50(Math.max(350,(vol*90+80)*sf))+' €';
+    $('eur').textContent='≈ '+r50(Math.max(300,(vol*65+95)*sf))+' – '+r50(Math.max(420,(vol*107+95)*sf))+' €';
     var loads=Math.max(1,Math.ceil(vol/10));
     $('vol').textContent="\u0440\u0435\u0439\u0441\u043e\u0432 \u0444\u0443\u0440\u0433\u043e\u043d\u0430: ~"+loads+(loads>1?"":"")+" \u00b7 \u043f\u0440\u0435\u0434\u0432\u0430\u0440\u0438\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u043e\u0446\u0435\u043d\u043a\u0430";
     var objName=$('obj').selectedOptions[0].text;
