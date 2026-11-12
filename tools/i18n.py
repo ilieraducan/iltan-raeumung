@@ -31,7 +31,7 @@ T = {
   'Tapeten entfernen': 'Снятие обоев',
   'Besenreine Übergabe': 'Уборка после вывоза',
   'Transportpauschale': 'Транспорт',
-  'Arbeitsstunde pro Mitarbeiter': 'Час работы одного сотрудника',
+  'Zusatzarbeit pro Mitarbeiter/Std.': 'Доп. работа, 1 сотрудник/час',
   'Sondermüll': 'Опасные отходы',
   'nach Aufwand': 'по объёму работ',
   'Richtpreis': 'Примерная цена',
@@ -71,7 +71,7 @@ T = {
   'Übergabe': 'Сдача',
   'Die Räume werden besenrein übergeben – bereit für Vermieter oder Käufer.': 'Помещение сдаём чисто выметенным — готовым для арендодателя или покупателя.',
   'Preise': 'Цены',
-  'Festpreis statt Stundenlohn': 'Фиксированная цена вместо почасовой оплаты',
+  'Festpreis – klar kalkuliert': 'Фиксированная цена — всё прозрачно',
   'Besichtigung': 'Осмотр',
   'kostenlos': 'бесплатно',
   'Angebot per Foto': 'Предложение по фото',
@@ -116,7 +116,7 @@ T = {
   'Wie bezahle ich?': 'Как оплатить?',
   'Nach der Übergabe per Überweisung auf Rechnung. Für Privatkunden ist der Arbeitsanteil als haushaltsnahe Dienstleistung steuerlich absetzbar.': 'После сдачи помещения — переводом по счёту. Частные клиенты могут вычесть стоимость работы из налогов как бытовую услугу (haushaltsnahe Dienstleistung).',
   'Jetzt kostenloses Angebot holen': 'Получите бесплатное предложение',
-  'Schicken Sie 3–5 Fotos der Räume per WhatsApp. Wir melden uns noch am selben Tag mit einem Festpreis.': 'Пришлите 3–5 фото помещений в WhatsApp. В тот же день мы ответим с фиксированной ценой.',
+  'Schicken Sie 3–5 Fotos der Räume per WhatsApp. Innerhalb von 24 Stunden erhalten Sie einen Festpreis.': 'Пришлите 3–5 фото помещений в WhatsApp. В течение 24 часов вы получите фиксированную цену.',
   'WhatsApp schreiben': 'Написать в WhatsApp',
   'Telefon / WhatsApp · Deutsch': 'Телефон / WhatsApp · на немецком',
   'Erreichbar': 'Время работы',
@@ -156,7 +156,7 @@ T = {
   'Tapeten entfernen': 'Îndepărtare tapet',
   'Besenreine Übergabe': 'Curățenie după debarasare',
   'Transportpauschale': 'Transport',
-  'Arbeitsstunde pro Mitarbeiter': 'Oră de lucru per angajat',
+  'Zusatzarbeit pro Mitarbeiter/Std.': 'Muncă suplimentară, 1 angajat/oră',
   'Sondermüll': 'Deșeuri periculoase',
   'nach Aufwand': 'după volum',
   'Richtpreis': 'Preț orientativ',
@@ -196,7 +196,7 @@ T = {
   'Übergabe': 'Predarea',
   'Die Räume werden besenrein übergeben – bereit für Vermieter oder Käufer.': 'Spațiile sunt predate curate – gata pentru proprietar sau cumpărător.',
   'Preise': 'Prețuri',
-  'Festpreis statt Stundenlohn': 'Preț fix, nu plată pe oră',
+  'Festpreis – klar kalkuliert': 'Preț fix — calculat transparent',
   'Besichtigung': 'Evaluare',
   'kostenlos': 'gratuit',
   'Angebot per Foto': 'Ofertă după poze',
@@ -241,7 +241,7 @@ T = {
   'Wie bezahle ich?': 'Cum plătesc?',
   'Nach der Übergabe per Überweisung auf Rechnung. Für Privatkunden ist der Arbeitsanteil als haushaltsnahe Dienstleistung steuerlich absetzbar.': 'După predare, prin transfer bancar pe factură. Persoanele fizice pot deduce din impozit costul manoperei ca serviciu casnic (haushaltsnahe Dienstleistung).',
   'Jetzt kostenloses Angebot holen': 'Cereți acum o ofertă gratuită',
-  'Schicken Sie 3–5 Fotos der Räume per WhatsApp. Wir melden uns noch am selben Tag mit einem Festpreis.': 'Trimiteți 3–5 poze cu încăperile pe WhatsApp. Vă răspundem în aceeași zi cu un preț fix.',
+  'Schicken Sie 3–5 Fotos der Räume per WhatsApp. Innerhalb von 24 Stunden erhalten Sie einen Festpreis.': 'Trimiteți 3–5 poze cu încăperile pe WhatsApp. În 24 de ore primiți un preț fix.',
   'WhatsApp schreiben': 'Scrie pe WhatsApp',
   'Telefon / WhatsApp · Deutsch': 'Telefon / WhatsApp · în germană',
   'Erreichbar': 'Program',
@@ -292,6 +292,8 @@ def build(lang, src):
         foot = sw(foot)
         main = re.sub(r'<td>ab ([0-9.,]+ €(?:/m²)?)</td>', lambda m: '<td>'+{'ru':'от ','ro':'de la '}[lang]+(m.group(1) if lang=='ro' else m.group(1).replace('.', ' ').replace('/m²','/м²'))+'</td>', main)
         main = main.replace('<label for="qm">Fläche (m²)', '<label for="qm">'+T[lang]['Fläche (m²)'])
+        main = main.replace('<label for="obj">Objekt', '<label for="obj">'+T[lang]['Objekt']).replace('<label for="etage">Etage ohne Aufzug', '<label for="etage">'+T[lang]['Etage ohne Aufzug'])
+        head = head.replace('content:"Schritt " counter(s)', 'content:"'+{'ru':'Шаг ','ro':'Pasul '}[lang]+'" counter(s)')
         for de_txt in sorted(T[lang], key=len, reverse=True):
             tr = T[lang][de_txt]
             main = main.replace('>' + de_txt + '<', '>' + tr + '<').replace('aria-label="' + de_txt + '"', 'aria-label="' + tr + '"')
