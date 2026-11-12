@@ -313,6 +313,45 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
 </div>
 
 <div class="wrap">
+  <div class="wrap"><section class="fb" id="feedback" aria-labelledby="fb-h">
+  <h2 id="fb-h"></h2>
+  <p class="fb-sub"></p>
+  <div class="fb-stars" role="radiogroup"></div>
+  <textarea id="fb-text" rows="3" maxlength="1000"></textarea>
+  <p class="fb-note"></p>
+  <button type="button" class="btn btn-main" id="fb-send" disabled></button>
+  <p class="fb-status" aria-live="polite"></p>
+</section>
+<style>
+.fb{max-width:640px;margin:32px auto;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r,14px);display:grid;gap:10px}
+.fb h2{margin:0;font-size:22px}.fb p{margin:0}.fb-sub,.fb-note{color:var(--muted);font-size:15px}.fb-note{font-size:13px}
+.fb-stars{display:flex;gap:4px}.fb-stars button{font-size:32px;line-height:1;background:none;border:0;padding:4px;cursor:pointer;color:var(--line)}
+.fb-stars button[aria-checked="true"],.fb-stars button.on{color:var(--accent)}
+.fb textarea{width:100%;font:16px/1.4 var(--f-body);padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);box-sizing:border-box}
+.fb .btn{justify-self:start;border:0;cursor:pointer}.fb .btn[disabled]{opacity:.5;cursor:default}
+</style>
+<script>
+(function(){
+var API='https://iltan-raumscan.katovski32.workers.dev/feedback';
+var S={de:{h:'Wie gefällt Ihnen unsere Website?',sub:'Ihre Meinung hilft uns. Was war unklar, was fehlt, was sollen wir verbessern?',ph:'Ihre Ideen und Anmerkungen (optional)',note:'Anonym – bitte keine persönlichen Daten eingeben.',send:'Feedback senden',ok:'Vielen Dank für Ihr Feedback!',err:'Senden hat nicht geklappt. Bitte später erneut versuchen.',star:'Sterne'},
+ru:{h:'Насколько удобен наш сайт?',sub:'Ваше мнение нам важно. Что было непонятно, чего не хватает, что улучшить?',ph:'Ваши идеи и замечания (по желанию)',note:'Анонимно — пожалуйста, не пишите личные данные.',send:'Отправить отзыв',ok:'Спасибо за ваш отзыв!',err:'Не удалось отправить. Попробуйте позже.',star:'звёзд'},
+ro:{h:'Cât de ușor de folosit este site-ul nostru?',sub:'Părerea dvs. ne ajută. Ce a fost neclar, ce lipsește, ce să îmbunătățim?',ph:'Ideile și observațiile dvs. (opțional)',note:'Anonim — vă rugăm nu scrieți date personale.',send:'Trimite părerea',ok:'Vă mulțumim pentru părere!',err:'Nu s-a putut trimite. Încercați mai târziu.',star:'stele'}};
+var box=document.getElementById('feedback');if(!box)return;
+var rating=0,L=function(){var l=(document.documentElement.lang||'de').slice(0,2);return S[l]?l:'de'};
+var stars=box.querySelector('.fb-stars'),txt=document.getElementById('fb-text'),send=document.getElementById('fb-send'),st=box.querySelector('.fb-status');
+for(var i=1;i<=5;i++)(function(n){var b=document.createElement('button');b.type='button';b.setAttribute('role','radio');b.textContent='★';b.addEventListener('click',function(){rating=n;paint();upd()});stars.appendChild(b)})(i);
+function paint(){[].forEach.call(stars.children,function(b,i){b.classList.toggle('on',i<rating);b.setAttribute('aria-checked',i+1===rating?'true':'false')})}
+function upd(){send.disabled=!(rating||txt.value.trim())}
+function text(){var s=S[L()];box.querySelector('h2').textContent=s.h;box.querySelector('.fb-sub').textContent=s.sub;box.querySelector('.fb-note').textContent=s.note;txt.placeholder=s.ph;send.textContent=s.send;[].forEach.call(stars.children,function(b,i){b.setAttribute('aria-label',(i+1)+' '+s.star)})}
+txt.addEventListener('input',upd);text();
+new MutationObserver(text).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+send.addEventListener('click',function(){send.disabled=true;st.textContent='';
+ fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({rating:rating,text:txt.value,lang:L(),page:location.pathname.indexOf('scan')>=0?'scan':'home'})})
+ .then(function(r){if(!r.ok)throw 0;st.textContent=S[L()].ok;txt.value='';rating=0;paint();})
+ .catch(function(){st.textContent=S[L()].err;upd()})});
+})();
+</script>
+</div>
   <div class="legal" id="impressum">
     <h2>Impressum</h2>
     <p>Angaben gemäß § 5 DDG<br>Iltan Räumung, Inhaberin: Tatjana Kopilova<br>Schölischer Straße 12, 21682 Stade<br>Telefon: 0151 11143537 · E-Mail: info@iltan-raeumung.de</p>
@@ -321,6 +360,7 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
     <h2>Datenschutz</h2>
     <p><strong>Hosting.</strong> Diese Website wird bei GitHub Pages (GitHub B.V., Niederlande / GitHub, Inc., USA) gehostet. Beim Aufruf verarbeitet der Hoster technisch notwendige Daten wie Ihre IP-Adresse und den Zeitpunkt des Abrufs, um die Seite auszuliefern und vor Missbrauch zu schützen (Art. 6 Abs. 1 lit. f DSGVO). Eine Übermittlung in die USA ist möglich; sie erfolgt auf Grundlage des EU-US Data Privacy Framework bzw. der EU-Standardvertragsklauseln. Schriftarten werden von unserem eigenen Server geladen, nicht von Google.</p>
     <p>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Werbedienste. Wenn Sie uns per WhatsApp, Telefon oder E-Mail kontaktieren, verarbeiten wir Ihre Angaben und Fotos ausschließlich zur Bearbeitung Ihrer Anfrage (Art. 6 Abs. 1 lit. b DSGVO) und löschen sie, sobald sie nicht mehr benötigt werden. Bei Nutzung von WhatsApp gelten zusätzlich die Datenschutzbestimmungen von WhatsApp Ireland Ltd. Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Beschwerde bei einer Aufsichtsbehörde. Verantwortlich: Tatjana Kopilova, Anschrift siehe Impressum.</p>
+    <p><strong>Feedback zur Website.</strong> Wenn Sie uns freiwillig eine Bewertung oder einen Kommentar zur Website senden, speichern wir diesen anonym (ohne Name und ohne IP-Adresse) bis zu 12 Monate über Cloudflare, Inc., um unsere Website zu verbessern (Art. 6 Abs. 1 lit. f DSGVO). Zum Schutz vor Missbrauch wird Ihre IP-Adresse bis zu 26 Stunden als Zähler gespeichert.</p>
     <p><strong>Raumscan (Schätzung per Video oder Foto).</strong> Nur wenn Sie den Raumscan nutzen und ausdrücklich einwilligen (Art. 6 Abs. 1 lit. a DSGVO), werden aus Ihrem Video in Ihrem Browser einige Einzelbilder erzeugt und zusammen mit Ihren Angaben zu Fläche und Etage über einen Server von Cloudflare, Inc. an den KI-Dienst von Anthropic PBC (USA) übermittelt, der daraus eine Mengenschätzung erstellt. Das Video selbst verlässt Ihr Gerät nicht. Wir speichern die Bilder nicht; zum Schutz vor Missbrauch wird Ihre IP-Adresse bis zu 26 Stunden als Zähler gespeichert. Die Übermittlung in die USA erfolgt auf Grundlage der EU-Standardvertragsklauseln bzw. des EU-US Data Privacy Framework. Bitte filmen Sie keine Personen oder Dokumente. Sie können Ihre Einwilligung jederzeit widerrufen, indem Sie den Raumscan nicht weiter nutzen; die Schätzung können Sie auch ohne KI per WhatsApp erhalten.</p>
   </div>
   <footer><span>© 2026 Iltan Räumung · Entrümpelung in Stade &amp; Hamburg</span><span><a href="#impressum">Impressum</a> · <a href="#datenschutz">Datenschutz</a></span></footer>

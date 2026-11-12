@@ -4,6 +4,7 @@
 //   ANTHROPIC_API_KEY  (secret, required)
 //   MODEL              (optional, default below)
 //   DAILY_LIMIT        (optional, default 8 estimates per IP per day)
+//   ADMIN_TOKEN        (text, required to view feedback at /feedback?t=...)
 // Binding: KV namespace "RL" (for the per-IP daily limit).
 
 const DEFAULT_MODEL = 'claude-sonnet-5-5';
@@ -45,11 +46,45 @@ function parseJSON(text) {
   return null;
 }
 
+// ---- Site feedback: POST stores {rating, text, lang, page}; GET ?t=ADMIN_TOKEN shows them ----
+const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+async function feedback(req, env, url, origin) {
+  if (!env.RL) return json({ error: 'not_configured' }, 500, origin);
+  if (req.method === 'POST') {
+    const ip = req.headers.get('CF-Connecting-IP') || 'unknown';
+    const k = `fbrl:${new Date().toISOString().slice(0, 10)}:${ip}`;
+    const used = Number((await env.RL.get(k)) || 0);
+    if (used >= 3) return json({ error: 'limit' }, 429, origin);
+    let b; try { b = await req.json(); } catch (_) { return json({ error: 'bad_request' }, 400, origin); }
+    const rating = Math.max(0, Math.min(5, Math.round(Number(b.rating) || 0)));
+    const text = String(b.text || '').trim().slice(0, 1000);
+    if (!rating && !text) return json({ error: 'empty' }, 400, origin);
+    await env.RL.put(k, String(used + 1), { expirationTtl: 60 * 60 * 26 });
+    const rec = { at: new Date().toISOString(), rating, text, lang: String(b.lang || '').slice(0, 2), page: String(b.page || '').slice(0, 20) };
+    await env.RL.put(`fb:${Date.now()}`, JSON.stringify(rec), { expirationTtl: 60 * 60 * 24 * 365 });
+    return json({ ok: true }, 200, origin);
+  }
+  if (req.method === 'GET') {
+    if (!env.ADMIN_TOKEN || url.searchParams.get('t') !== env.ADMIN_TOKEN) return new Response('Forbidden', { status: 403 });
+    const list = await env.RL.list({ prefix: 'fb:' });
+    const rows = [];
+    for (const key of list.keys.slice(-200).reverse()) { const v = await env.RL.get(key.name); if (v) rows.push(JSON.parse(v)); }
+    const avg = rows.filter((r) => r.rating).reduce((a, r, _, arr) => a + r.rating / arr.length, 0);
+    const html = `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Отзывы о сайте</title>
+<style>body{font:16px/1.45 system-ui,sans-serif;margin:0;padding:16px;background:#F4F1EA;color:#17332D}h1{font-size:22px;margin:0 0 4px}.c{background:#fff;border-radius:10px;padding:12px 14px;margin:10px 0;border-left:4px solid #F2B630}.m{font-size:13px;opacity:.7}</style>
+<h1>Отзывы о сайте</h1><p class="m">Всего: ${rows.length}${avg ? ` · средняя оценка ${avg.toFixed(1)} ★` : ''}</p>
+${rows.map((r) => `<div class="c"><div>${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>${r.text ? `<p>${esc(r.text)}</p>` : ''}<div class="m">${esc(r.at.replace('T', ' ').slice(0, 16))} UTC · ${esc(r.lang)} · ${esc(r.page)}</div></div>`).join('') || '<p>Пока нет отзывов.</p>'}`;
+    return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+  }
+  return json({ error: 'not_found' }, 404, origin);
+}
+
 export default {
   async fetch(req, env) {
     const origin = req.headers.get('Origin') || '';
     if (req.method === 'OPTIONS') return new Response(null, { headers: cors(origin) });
     const url = new URL(req.url);
+    if (url.pathname === '/feedback') return feedback(req, env, url, origin);
     if (req.method !== 'POST' || url.pathname !== '/estimate') return json({ error: 'not_found' }, 404, origin);
     if (!env.ANTHROPIC_API_KEY) return json({ error: 'not_configured' }, 500, origin);
 
