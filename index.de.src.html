@@ -96,6 +96,8 @@ section{padding-block:56px}
 .prices{width:100%;border-collapse:collapse;font-size:16px}
 .prices td{padding:12px 0;border-bottom:1px solid var(--line)}
 .prices td:last-child{text-align:right;font:500 15px/1 var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pl{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:36px}.pl h3{margin:0 0 6px}
+@media(max-width:760px){.pl{grid-template-columns:1fr}}
 .note{margin-top:12px;font-size:14px;color:var(--muted)}
 .calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:16px}
 .calc label{display:grid;gap:6px;font-weight:600;font-size:15px}
@@ -261,11 +263,45 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
           <small>Geschätzte Menge Räumgut</small>
           <div class="big" id="price">ca. 18 m³</div>
           <small id="vol">entspricht etwa 2 Transporterladungen · unverbindliche Schätzung</small>
+          <small style="margin-top:8px">Richtpreis</small>
+          <div class="big" id="eur">≈ 1.050 – 1.700 €</div>
         </div>
         <a class="btn btn-main" id="wa-calc" href="#" style="justify-content:center">Festpreis per WhatsApp anfragen</a>
         <a class="btn btn-ghost" href="scan/" style="justify-content:center">Genauer: Raum per Video scannen</a>
       </form>
     </div>
+    <div class="pl">
+      <div>
+        <h3>Richtpreise Räumung</h3>
+        <table class="prices">
+          <tr><td>Keller bis 10 m²</td><td>ab 250 €</td></tr>
+          <tr><td>Garage</td><td>ab 300 €</td></tr>
+          <tr><td>Schuppen / Gartenhaus</td><td>ab 300 €</td></tr>
+          <tr><td>Dachboden</td><td>ab 400 €</td></tr>
+          <tr><td>1-Zimmer-Wohnung</td><td>ab 600 €</td></tr>
+          <tr><td>2-Zimmer-Wohnung</td><td>ab 1.000 €</td></tr>
+          <tr><td>3-Zimmer-Wohnung</td><td>ab 1.500 €</td></tr>
+          <tr><td>Haus bis 120 m²</td><td>ab 2.500 €</td></tr>
+          <tr><td>Messie-Wohnung</td><td>nach Besichtigung</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Zusatzleistungen</h3>
+        <table class="prices">
+          <tr><td>Sperrmüll je m³</td><td>ab 120 €</td></tr>
+          <tr><td>Küche demontieren</td><td>ab 150 €</td></tr>
+          <tr><td>Einbauschrank demontieren</td><td>ab 150 €</td></tr>
+          <tr><td>Teppich entfernen</td><td>ab 5 €/m²</td></tr>
+          <tr><td>Laminat entfernen</td><td>ab 8 €/m²</td></tr>
+          <tr><td>Tapeten entfernen</td><td>ab 6 €/m²</td></tr>
+          <tr><td>Besenreine Übergabe</td><td>ab 100 €</td></tr>
+          <tr><td>Transportpauschale</td><td>ab 80 €</td></tr>
+          <tr><td>Arbeitsstunde pro Mitarbeiter</td><td>ab 35 €</td></tr>
+          <tr><td>Sondermüll</td><td>nach Aufwand</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="note">Richtpreise. Den verbindlichen Festpreis nennen wir Ihnen nach Fotos oder Besichtigung. Etage ohne Aufzug: +5–10 % je Etage. Verwertbare Gegenstände rechnen wir an.</p>
   </div>
 </section>
 
@@ -382,6 +418,8 @@ send.addEventListener('click',function(){send.disabled=true;st.textContent='';
     var et=+$('etage').value, obj=$('obj').value;
     var vol=Math.max(2,Math.round(qm*dens[fill]*objF[obj]));
     $('price').textContent='ca. '+vol+' m³';
+    var r50=function(n){return (Math.round(n/50)*50).toLocaleString('de-DE')};var sf=1+0.075*et;
+    $('eur').textContent='≈ '+r50(Math.max(250,(vol*55+80)*sf))+' – '+r50(Math.max(350,(vol*90+80)*sf))+' €';
     var loads=Math.max(1,Math.ceil(vol/10));
     $('vol').textContent='entspricht etwa '+loads+' Transporterladung'+(loads>1?'en':'')+' · unverbindliche Schätzung';
     var objName=$('obj').selectedOptions[0].text;

@@ -99,6 +99,8 @@ section{padding-block:56px}
 .prices{width:100%;border-collapse:collapse;font-size:16px}
 .prices td{padding:12px 0;border-bottom:1px solid var(--line)}
 .prices td:last-child{text-align:right;font:500 15px/1 var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pl{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:36px}.pl h3{margin:0 0 6px}
+@media(max-width:760px){.pl{grid-template-columns:1fr}}
 .note{margin-top:12px;font-size:14px;color:var(--muted)}
 .calc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:16px}
 .calc label{display:grid;gap:6px;font-weight:600;font-size:15px}
@@ -270,11 +272,45 @@ footer{padding-block:28px;font-size:14px;color:var(--muted);display:flex;flex-wr
           <small>Volum estimat de ridicat</small>
           <div class="big" id="price">ca. 18 m³</div>
           <small id="vol">aproximativ 2 transporturi cu duba · estimare orientativă</small>
+          <small style="margin-top:8px">Preț orientativ</small>
+          <div class="big" id="eur">≈ 1.050 – 1.700 €</div>
         </div>
         <a class="btn btn-main" id="wa-calc" href="#" style="justify-content:center">Cere prețul pe WhatsApp</a>
         <a class="btn btn-ghost" href="../scan/?lang=ro" style="justify-content:center">Mai exact: evaluare după video</a>
       </form>
     </div>
+    <div class="pl">
+      <div>
+        <h3>Prețuri orientative</h3>
+        <table class="prices">
+          <tr><td>Pivniță până la 10 m²</td><td>de la 250 €</td></tr>
+          <tr><td>Garaj</td><td>de la 300 €</td></tr>
+          <tr><td>Șopron / căsuță de grădină</td><td>de la 300 €</td></tr>
+          <tr><td>Pod</td><td>de la 400 €</td></tr>
+          <tr><td>Garsonieră</td><td>de la 600 €</td></tr>
+          <tr><td>Apartament 2 camere</td><td>de la 1.000 €</td></tr>
+          <tr><td>Apartament 3 camere</td><td>de la 1.500 €</td></tr>
+          <tr><td>Casă până la 120 m²</td><td>de la 2.500 €</td></tr>
+          <tr><td>Locuință foarte aglomerată</td><td>după evaluare</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>Servicii suplimentare</h3>
+        <table class="prices">
+          <tr><td>Deșeuri voluminoase pe m³</td><td>de la 120 €</td></tr>
+          <tr><td>Demontare bucătărie</td><td>de la 150 €</td></tr>
+          <tr><td>Demontare dulap încastrat</td><td>de la 150 €</td></tr>
+          <tr><td>Îndepărtare mochetă</td><td>de la 5 €/m²</td></tr>
+          <tr><td>Îndepărtare parchet laminat</td><td>de la 8 €/m²</td></tr>
+          <tr><td>Îndepărtare tapet</td><td>de la 6 €/m²</td></tr>
+          <tr><td>Curățenie după debarasare</td><td>de la 100 €</td></tr>
+          <tr><td>Transport</td><td>de la 80 €</td></tr>
+          <tr><td>Oră de lucru per angajat</td><td>de la 35 €</td></tr>
+          <tr><td>Deșeuri periculoase</td><td>după volum</td></tr>
+        </table>
+      </div>
+    </div>
+    <p class="note">Prețuri orientative. Prețul fix vi-l comunicăm după poze sau evaluare. Etaj fără lift: +5–10 % pe etaj. Obiectele valorificabile le scădem din preț.</p>
   </div>
 </section>
 
@@ -393,6 +429,8 @@ send.addEventListener('click',function(){send.disabled=true;st.textContent='';
     var et=+$('etage').value, obj=$('obj').value;
     var vol=Math.max(2,Math.round(qm*dens[fill]*objF[obj]));
     $('price').textContent="cca. "+vol+' m³';
+    var r50=function(n){return (Math.round(n/50)*50).toLocaleString('ro-RO')};var sf=1+0.075*et;
+    $('eur').textContent='≈ '+r50(Math.max(250,(vol*55+80)*sf))+' – '+r50(Math.max(350,(vol*90+80)*sf))+' €';
     var loads=Math.max(1,Math.ceil(vol/10));
     $('vol').textContent="aproximativ "+loads+(loads>1?" transporturi cu duba":" transport cu duba")+" \u00b7 estimare orientativ\u0103";
     var objName=$('obj').selectedOptions[0].text;
